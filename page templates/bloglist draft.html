@@ -1,0 +1,26 @@
+<!-- html for blog listing-->
+<h2>Xerces Blog</h2>
+<div class="sub-dvdr"></div>
+<h3>Blog Title Goes here!</h3>
+<h4>Author, date, and time</h4>
+<br/>
+<div class="grid_4">
+	HERE GOES SOME OF THE BLOG CONTENT
+	<a href="Post Page">Read More...</a>
+</div>
+<div class="sub-dvdr"></div>
+<h2>Latest Posts</h2>
+<!-- Here is the html for one post -->
+<div class="grid_1" style="margin-left:0px;">
+	    <a href='<?php the_permalink() ?>'rel='bookmark' title='<?php echo get_the_title($ID); ?>'><?php if ( has_post_thumbnail() ) {
+			the_post_thumbnail('thumbnail');
+			} ?></a>
+			</div>
+<div class="grid_3">
+		<a href='<?php the_permalink() ?>'rel='bookmark' title='<?php echo get_the_title($ID); ?>' target="blank_"><h4 style="margin-top:0px;"><?php echo get_the_title($ID); ?></h4></a>
+
+<!-- Eventually there will be a "categories" section here <h5>Posted in</h5>: -->
+<!-- Maybe comments, eventually <h3>Comments</h3>
+<br/> -->
+<!-- All comments go here -->
+<!-- Insert social sharing here -->
