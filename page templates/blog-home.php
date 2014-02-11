@@ -10,21 +10,41 @@ Template Name: Page - Blog Home
 <div id="maincolumn">
 
 <!-- LOOP 1: Displays the most recent post -->
-	<?php if ( have_posts() ) : ?>
-		<?php query_posts('category_name=blog&showposts=1'); ?> <!-- how do you make this show only the most recent post? -->
-		<?php while (have_posts()) : the_post(); ?>
-			<a href="<?php the_permalink() ?>"><h3><?php the_title() ?></h3></a><small><?php the_time('l, F jS, Y') ?></small>
-                <div class="entry">
-                <?php the_content(); ?> <!-- How do you make this truncate the content at a certain point? -->
-				</div>
-        <?php endwhile; ?>
-   	<?php endif; ?>
+	<?php
+
+	$args = array(
+		'post_type' => 'post',
+		'category_name' => 'featured',
+		'posts_per_page' => 1,
+	);
+
+	$the_query = new WP_Query( $args );
+
+	?>
+
+	<?php if ( have_posts() ) : while ( $the_query->have_posts() ) : the_post(); ?>
+	<?php endwhile; endif; ?>
+
 <!-- END LOOP 1 -->
 
    	<div id="sub-dvdr">
    		<h4>Latest Posts</h4>
    		<!-- LOOP 2: Displays four posts after this -->
+   		<ul>
+			<?php
 
+
+			$args = array( 'posts_per_page' => 5, 'offset'=> 1, 'category' => 1 );
+
+			$myposts = get_posts( $args );
+			foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
+				<li>
+					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+				</li>
+			<?php endforeach; 
+			wp_reset_postdata();?>
+
+			</ul>
    		<!-- END LOOP 2 -->
 	<!-- <div id="sub-dvdr">
 		<h5>More Posts</h5> -->
